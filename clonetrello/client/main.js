@@ -1,52 +1,49 @@
+import { Meteor } from 'meteor/meteor';
 import Vue from 'vue';
-
-import '../imports/ui/plugins';
+import VueMeteorTracker from 'vue-meteor-tracker';
 
 import Vuetify from 'vuetify';
 import 'vuetify/dist/vuetify.min.css';
 
+import Router from 'vue-router';
 
-import App from '../imports/ui/App.vue';
-
-import VueMeteorTracker from 'vue-meteor-tracker';
-
-import Router from "vue-router";
-
-
-Vue.use(VueMeteorTracker)
-
-
+import AppComponent from '/imports/ui/App.vue';
 
 Meteor.startup(() => {
-  Vue.use(Router)
+  Vue.use(VueMeteorTracker);
+  Vue.use(Vuetify);
+  Vue.use(Router);
 
- const router = new Router({
-   mode: 'history',
-   routes: [
-     {
-    path: '/',
-    name: 'Login',
-    component: () => import('/imports/ui/components/Login.vue')
+  const vuetify = new Vuetify({
+    theme: {
+      dark: true,
+    },
+  });
 
-  },
-  {
-    path: '/',
-    name: 'Register',
-    component: () => import('/imports/ui/components/Register.vue')
-
-  },
-  {
-    path: '*',
-    name: 'notfound',
-    component: () => import('/imports/ui/components/NotFoundy.vue')
-
-  },
-
-   ]
- })
+  const router = new Router({
+    mode: 'history',
+    routes: [
+      {
+        path: '/',
+        name: 'Navigation',
+        component: () => import('/imports/ui/components/Navigation.vue'),
+      },
+      {
+        path: '/about',
+        name: 'about',
+        component: () => import('/client/components/About.vue'),
+      },
+      {
+        path: '*',
+        name: 'notfound',
+        component: () => import('/client/components/NotFound.vue'),
+      },
+    ],
+  });
 
   new Vue({
-  render:(h) => h(AppComponent),
-  router
-  })
-})
+    render: (h) => h(AppComponent),
+    vuetify,
+    router,
+  }).$mount('main');
+});

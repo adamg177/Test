@@ -1,59 +1,43 @@
 <template>
-  <Navigation/>
+  <v-app>
+    <v-container>
 
-<main class="form-signin">
-  <router-view/>
-</main>
+      <header>
+        <router-link to="/">
+          Navigation
+        </router-link>
+        <router-link to="/about">
+          About
+        </router-link>
+      </header>
 
+      <router-view v-if="user" />
+    </v-container>
+  </v-app>
 </template>
 
 
 
 <script>
-  import Vue from "vue";
-  //import Task from "./components/Task.vue";
-  import Login from "./components/Login.vue";
-  import Navigation from "./components/Navigation.vue"
-  
+import { Meteor } from 'meteor/meteor';
+import { Tracker } from 'meteor/tracker';
 
-  export default {
-      components: {
-        Navigation
-      },
-  }
-;
+export default {
+  data() {
+    return {
+      user: null,
+    };
+  },
+  created() {
+    Tracker.autorun(() => {
+      this.user = Meteor.user();
+      console.log(this.user);
+    });
+  },
+};
 </script>
 
 
 <style scoped>
-body {background-color: rgba(78, 224, 234, 0.116);}
-.form-signin {
-  width: 100%;
-  max-width: 330px;
-  padding: 15px;
-  margin: auto;
-}
 
-.form-signin .checkbox {
-  font-weight: 400;
-}
-
-.form-signin .form-floating:focus-within {
-  z-index: 2;
-}
-
-.form-signin input[type="email"] {
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-
-.form-signin input[type="password"] {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
-.authors{
-  position: fixed; bottom: 0px; left: 0px ;z-index: 10;
-}
 </style>
