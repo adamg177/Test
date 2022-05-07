@@ -25,13 +25,13 @@ Meteor.startup(() => {
     routes: [
       {
         path: '/',
-        name: 'Navigation',
-        component: () => import('/imports/ui/components/Navigation.vue'),
+        name: 'Login',
+        component: () => import('/imports/ui/components/Login.vue'),
       },
       {
-        path: '/about',
-        name: 'about',
-        component: () => import('/client/components/About.vue'),
+        path: '/Register',
+        name: 'Register',
+        component: () => import('/client/components/Register.vue'),
       },
       {
         path: '*',
@@ -43,7 +43,7 @@ Meteor.startup(() => {
 
   new Vue({
     render: (h) => h(AppComponent),
-    vuetify,
+    //vuetify,
     router,
   }).$mount('main');
 });

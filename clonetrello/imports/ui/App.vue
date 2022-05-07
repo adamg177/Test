@@ -1,13 +1,14 @@
 <template>
   <v-app>
-    <v-container>
-
+   <v-container>
+   <Navigation/>
+   <h1>adam</h1>
       <header>
         <router-link to="/">
-          Navigation
+          Login
         </router-link>
-        <router-link to="/about">
-          About
+        <router-link to="/Register">
+          Register
         </router-link>
       </header>
 

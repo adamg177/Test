@@ -37,7 +37,7 @@
 
 <script>
     export default{
-        name: "Log_in"
+        name: "Login"
     }
  </script>
    
